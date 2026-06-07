@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход | Личный кабинет фрилансера</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="pattern-layer" style="position: absolute; width: 100%; height: 100%; pointer-events: none; overflow: hidden;">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" opacity="0.1">
+        <defs>
+            <pattern id="flowers" x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+                <path d="M60,20 Q65,10 70,20 Q75,30 60,20" fill="#db2777" opacity="0.6"/>
+                <path d="M55,25 Q50,15 55,10 Q60,5 65,10 Q70,15 55,25" fill="#ec4899" opacity="0.4"/>
+                <circle cx="60" cy="20" r="3" fill="#f472b6"/>
+                <circle cx="30" cy="70" r="4" fill="#db2777" opacity="0.5"/>
+                <circle cx="90" cy="70" r="4" fill="#db2777" opacity="0.5"/>
+                <path d="M30,70 Q40,60 50,70" stroke="#be185d" fill="none" stroke-width="0.8"/>
+                <path d="M70,70 Q80,60 90,70" stroke="#be185d" fill="none" stroke-width="0.8"/>
+            </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#flowers)"/>
+    </svg>
+</div>
+        <div class="login-box">
+            <h1>Личный кабинет фрилансера</h1>
+            <div class="login-tabs">
+                <button class="tab-btn active" onclick="showTab('login')">Вход</button>
+                <button class="tab-btn" onclick="showTab('register')">Регистрация</button>
+            </div>
+            
+            <div id="login-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="login-email" placeholder="admin@test.com">
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" id="login-password" placeholder="admin123">
+                </div>
+                <button class="btn" onclick="login()">Войти</button>
+            </div>
+            
+            <div id="register-form" style="display:none;">
+                <div class="form-group">
+                    <label>ФИО</label>
+                    <input type="text" id="reg-name" placeholder="Иванов Иван Иванович">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="reg-email" placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Пароль</label>
+                    <input type="password" id="reg-password" placeholder="минимум 6 символов">
+                </div>
+                <div class="form-group">
+                    <label>Роль</label>
+                    <select id="reg-role">
+                        <option value="Executor">Исполнитель</option>
+                        <option value="Admin">Администратор</option>
+                    </select>
+                </div>
+                <button class="btn" onclick="register()">Зарегистрироваться</button>
+            </div>
+            
+            <div id="error-message" class="error-message"></div>
+            <div style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-radius: 5px; font-size: 12px;">
+                <strong>Тестовые данные:</strong><br>
+                👑 Админ: admin@test.com / admin123<br>
+                👤 Исполнитель: executor@test.com / executor123
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:5026/api';
+        
+        function showTab(tab) {
+            document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById('register-form').style.display = tab === 'register' ? 'block' : 'none';
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+        
+        async function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            if (!email || !password) {
+                document.getElementById('error-message').textContent = 'Заполните все поля';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    window.location.href = 'index.html';
+                } else {
+                    document.getElementById('error-message').textContent = data.message || 'Ошибка входа';
+                }
+            } catch (error) {
+                document.getElementById('error-message').textContent = 'Ошибка соединения с сервером. Убедитесь, что сервер запущен на http://localhost:5000';
+            }
+        }
+        
+        async function register() {
+            const fullName = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const role = document.getElementById('reg-role').value;
+            
+            if (!fullName || !email || !password) {
+                document.getElementById('error-message').textContent = 'Заполните все поля';
+                return;
+            }
+            
+            if (password.length < 6) {
+                document.getElementById('error-message').textContent = 'Пароль должен быть не менее 6 символов';
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ fullName, email, password, role })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    alert('Регистрация успешна! Теперь войдите в систему.');
+                    showTab('login');
+                    document.getElementById('login-email').value = email;
+                } else {
+                    document.getElementById('error-message').textContent = data.message || 'Ошибка регистрации';
+                }
+            } catch (error) {
+                document.getElementById('error-message').textContent = 'Ошибка соединения с сервером';
+            }
+        }
+    </script>
+</body>
+</html>
