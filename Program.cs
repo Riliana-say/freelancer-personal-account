@@ -48,6 +48,7 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
     dbContext.Database.EnsureCreated();
+    await SeedData.InitializeAsync(scope.ServiceProvider);
 }
 
 app.UseMiddleware<JwtMiddleware>();
@@ -60,4 +61,4 @@ app.MapControllers();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.Run();
+await app.RunAsync();

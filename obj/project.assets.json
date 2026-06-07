@@ -2886,11 +2886,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rinaa\\FreelancerPersonalAccount\\FreelancerPersonalAccount\\FreelancerPersonalAccount.csproj",
+      "projectUniqueName": "C:\\Users\\rinaa\\Downloads\\FreelancerPersonalAccount\\FreelancerPersonalAccount.csproj",
       "projectName": "FreelancerPersonalAccount",
-      "projectPath": "C:\\Users\\rinaa\\FreelancerPersonalAccount\\FreelancerPersonalAccount\\FreelancerPersonalAccount.csproj",
+      "projectPath": "C:\\Users\\rinaa\\Downloads\\FreelancerPersonalAccount\\FreelancerPersonalAccount.csproj",
       "packagesPath": "C:\\Users\\rinaa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rinaa\\FreelancerPersonalAccount\\FreelancerPersonalAccount\\obj\\",
+      "outputPath": "C:\\Users\\rinaa\\Downloads\\FreelancerPersonalAccount\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2978,7 +2978,7 @@
       "code": "NU1902",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "У пакета \"System.IdentityModel.Tokens.Jwt\" 7.0.3 есть известная уязвимость https://github.com/advisories/GHSA-59j7-ghrg-fj52 (уровень серьезности: средний)",
+      "message": "Package 'System.IdentityModel.Tokens.Jwt' 7.0.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
       "libraryId": "System.IdentityModel.Tokens.Jwt",
       "targetGraphs": [
         "net8.0"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2tRfVprXR3Y=",
+  "dgSpecHash": "9WGGD9+U/jA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\rinaa\\FreelancerPersonalAccount\\FreelancerPersonalAccount\\FreelancerPersonalAccount.csproj",
+  "projectFilePath": "C:\\Users\\rinaa\\Downloads\\FreelancerPersonalAccount\\FreelancerPersonalAccount.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rinaa\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\rinaa\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
@@ -64,10 +64,10 @@
     {
       "code": "NU1902",
       "level": "Warning",
-      "message": "У пакета \"System.IdentityModel.Tokens.Jwt\" 7.0.3 есть известная уязвимость https://github.com/advisories/GHSA-59j7-ghrg-fj52 (уровень серьезности: средний)",
-      "projectPath": "C:\\Users\\rinaa\\FreelancerPersonalAccount\\FreelancerPersonalAccount\\FreelancerPersonalAccount.csproj",
+      "message": "Package 'System.IdentityModel.Tokens.Jwt' 7.0.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
+      "projectPath": "C:\\Users\\rinaa\\Downloads\\FreelancerPersonalAccount\\FreelancerPersonalAccount.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\rinaa\\FreelancerPersonalAccount\\FreelancerPersonalAccount\\FreelancerPersonalAccount.csproj",
+      "filePath": "C:\\Users\\rinaa\\Downloads\\FreelancerPersonalAccount\\FreelancerPersonalAccount.csproj",
       "libraryId": "System.IdentityModel.Tokens.Jwt",
       "targetGraphs": [
         "net8.0"
